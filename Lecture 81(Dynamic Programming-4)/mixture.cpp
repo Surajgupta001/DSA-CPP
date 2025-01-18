@@ -73,16 +73,20 @@ int helper(vector<int>& colors, int i, int j){
     return result;
 }
 
-int colorMixture(vector<int>& colors, int i, int j, vector<vector<int>>& dp){
+int colorMixture(vector<int>& color, int i, int j, vector<vector<int>>& dp){
     if(i == j) return 0;
     if(dp[i][j] != -1) return dp[i][j];
     int minSmoke = INT_MAX;
     for(int k=i; k<j; k++){
-        int smoke = (helper(colors,i,k) * helper(colors,k+1,j)) % 100;
-        minSmoke = min(minSmoke, smoke + colorMixture(colors,i,k, dp) + colorMixture(colors,k+1,j, dp));
+        int smoke = (helper(color,i,k) * helper(color,k+1,j)) % 100;
+        minSmoke = min(minSmoke, smoke + colorMixture(color,i,k, dp) + colorMixture(color,k+1,j, dp));
     }
-    dp[i][j] = minSmoke;
-    return minSmoke;
+    return dp[i][j] = minSmoke;
+}
+
+int calculateMinSmoke(vector<int>& colors){
+    vector<vector<int>> dp(colors.size(),vector<int>(colors.size()-1));
+    return colorMixture(colors,0,colors.size()-1,dp);
 }
 
 int main(){
@@ -95,8 +99,7 @@ int main(){
     cout<<"Enter all the elements: ";
     for(int i=0; i<n; i++) cin>>colors[i];
 
-    vector<vector<int>> dp(n, vector<int>(n, -1));
-    cout<<colorMixture(colors,0,n-1, dp)<<endl;
-    
+    cout<<"Minimum amount of smoke will be : "<<calculateMinSmoke(colors)<<endl;
+
     return 0;
 }
