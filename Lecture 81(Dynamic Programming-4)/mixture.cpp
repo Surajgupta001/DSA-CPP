@@ -39,3 +39,39 @@ first mix 60 and 20 (smoke: 1200), getting 80, then mix 40 and 80 (smoke: 3200);
 The first scenario is a much better way to proceed.
 */ 
 
+#include <iostream>
+#include <vector>
+#include <climits>
+using namespace std;
+
+int helper(vector<int>& colors, int i, int j){
+    int result = 0;
+    for(int m=i; m<=j; m++){
+        result = (result % 100 + colors[m]) % 100;
+    }
+    return result;
+}
+
+int colorMixture(vector<int>& color, int i, int j){
+    if(i == j) return 0;
+    int minSmoke = INT_MAX;
+    for(int k=i; k<j; k++){
+        int smoke = helper(color, i, k) * helper(color, k+1, j);
+        minSmoke = min(minSmoke, smoke + colorMixture(color, i, k) + colorMixture(color, k+1, j));
+    }
+    return minSmoke;
+}
+
+int main(){
+    int n;
+    cout<<"Enter the size of vector: ";
+    cin>>n;
+
+    vector<int>colors(n);
+    cout<<"Enter all the elements: ";
+    for(int i=0; i<n; i++) cin>>colors[i];
+
+    cout<<"Minimum amount of smoke will be: "<<colorMixture(colors,0,n-1)<<endl;
+
+    return 0;
+}
