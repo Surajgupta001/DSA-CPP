@@ -44,6 +44,8 @@ The first scenario is a much better way to proceed.
 #include <climits>
 using namespace std;
 
+/*
+============== Recursion ==============
 int helper(vector<int>& colors, int i, int j){
     int result = 0;
     for(int m=i; m<=j; m++){
@@ -61,8 +63,30 @@ int colorMixture(vector<int>& color, int i, int j){
     }
     return minSmoke;
 }
+*/ 
+
+int helper(vector<int>& colors, int i, int j){
+    int result = 0;
+    for(int m=i; m<=j; m++){
+        result = (result % 100 + colors[m]) % 100;
+    }
+    return result;
+}
+
+int colorMixture(vector<int>& colors, int i, int j, vector<vector<int>>& dp){
+    if(i == j) return 0;
+    if(dp[i][j] != -1) return dp[i][j];
+    int minSmoke = INT_MAX;
+    for(int k=i; k<j; k++){
+        int smoke = (helper(colors,i,k) * helper(colors,k+1,j)) % 100;
+        minSmoke = min(minSmoke, smoke + colorMixture(colors,i,k, dp) + colorMixture(colors,k+1,j, dp));
+    }
+    dp[i][j] = minSmoke;
+    return minSmoke;
+}
 
 int main(){
+
     int n;
     cout<<"Enter the size of vector: ";
     cin>>n;
@@ -71,7 +95,8 @@ int main(){
     cout<<"Enter all the elements: ";
     for(int i=0; i<n; i++) cin>>colors[i];
 
-    cout<<"Minimum amount of smoke will be: "<<colorMixture(colors,0,n-1)<<endl;
-
+    vector<vector<int>> dp(n, vector<int>(n, -1));
+    cout<<colorMixture(colors,0,n-1, dp)<<endl;
+    
     return 0;
 }
