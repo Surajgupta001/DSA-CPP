@@ -10,7 +10,8 @@
     "*.tcc": "cpp",
     "ostream": "cpp",
     "unordered_set": "cpp",
-    "new": "cpp"
+    "new": "cpp",
+    "vector": "cpp"
   },
   "C_Cpp.errorSquiggles": "enabled",
   "C_Cpp_Runner.cCompilerPath": "gcc",
