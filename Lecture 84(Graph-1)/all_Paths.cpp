@@ -31,6 +31,7 @@ using namespace std;
 vector<list<int>> graph;
 unordered_set<int> visited;
 vector<vector<int>> result;
+
 void add_edge(int src, int dest, bool bi_dir = true){
     graph[src].push_back(dest);
     if(bi_dir) graph[dest].push_back(src);

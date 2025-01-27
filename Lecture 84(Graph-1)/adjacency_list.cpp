@@ -24,13 +24,16 @@ void display(){
 
 int main(){
 
+    cout << "Enter the number of vertices: ";
     cin >> v;
     // graph.resize(v, list<int> ());
     graph.resize(v);
     int e;
+    cout << "Enter the number of edges: ";
     cin >> e;
     while(e--){
         int src, dest;
+        cout << "Enter source and vertex: ";
         cin >> src >> dest;
         add_edge(src, dest); // unwaighted graph
         add_edge(src, dest, false); // waighted graph
