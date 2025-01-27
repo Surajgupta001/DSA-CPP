@@ -7,6 +7,7 @@ using namespace std;
 vector<vector<int>>graph;
 
 int v; // no of vertices
+
 void add_edge(int src, int dest, bool bi_dir = true){
     graph[src].push_back(dest);
     if(bi_dir) graph[dest].push_back(src);
@@ -33,7 +34,7 @@ int main(){
     cin >> e;
     while(e--){
         int src, dest;
-        cout << "Enter source and vertex: ";
+        cout << "Enter source and destination: ";
         cin >> src >> dest;
         add_edge(src, dest); // unwaighted graph
         add_edge(src, dest, false); // waighted graph

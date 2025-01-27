@@ -55,7 +55,7 @@ void bfs(int src, vector<int>& dist){
                 dist[neighbour] = dist[curr] + 1;
             }
         }
-        cout<<endl;
+        // cout<<endl;
     }
 }
 
@@ -85,9 +85,10 @@ int main(){
 
     vector<int> dist;
     bfs(start, dist);
+
+    cout<<endl;
     for(int i=0;i<dist.size();i++){
-        // cout << "Vertex " << i << " is at distance " << dist[i] << endl;
-        cout<<dist[i]<<endl;
+        cout<<"Vertex "<<i<<" is at distance "<<dist[i]<<endl;
     }
     return 0;
 }
