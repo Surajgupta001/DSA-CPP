@@ -118,9 +118,7 @@ int main() {
 
     vector<vector<int>> result = pacificAtlantic(height);
     cout << "Cells that can flow to both oceans:" << endl;
-    for (auto& cell : result) {
-        cout << "(" << cell[0] << ", " << cell[1] << ")" << endl;
-    }
+    for (auto& cell : result) cout<<"("<<cell[0]<<", "<<cell[1]<<")"<< endl;
 
     return 0;
 }

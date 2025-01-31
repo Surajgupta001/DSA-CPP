@@ -77,9 +77,10 @@ int orangesRotting(vector<vector<int>>& grid){
 }
 
 int main(){
-    // Example usage
+
     vector<vector<int>> grid = {{2,1,1},{1,1,0},{0,1,1}};
     int result = orangesRotting(grid);
-    cout << "Minimum minutes to rot all oranges: " << result << endl;
+    cout<<"Minimum minutes to rot all oranges: "<<result<<endl;
+    
     return 0;
 }
