@@ -62,7 +62,7 @@ vector<vector<bool>> bfs(queue<pair<int, int>>& q){
         for(int d=0; d<4; d++){
             int newRow = i + dir[d][0];
             int newCol = j + dir[d][1];
-            if(newRow < 0 or newCol < 0 < newRow >= rows or newCol >= cols) continue; // You exited the grid
+            if(newRow < 0 or newCol < 0 or newRow >= rows or newCol >= cols) continue; // You exited the grid
             if(visited[newRow][newCol]) continue; // You already visited this cell
             if(h[newRow][newCol] < h[i][j]) continue; // h[newRow][newCol] -> neighbours, h[i][j] -> currentCell
             q.push({newRow, newCol});

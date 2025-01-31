@@ -35,9 +35,51 @@ Explanation: Since there are already no fresh oranges at minute 0, the answer is
 using namespace std;
 
 int orangesRotting(vector<vector<int>>& grid){
-    queue<pair<int>>& grid
+    queue<pair<int, int>> q;
+    int freshOranges = 0;
+    int n = grid.size();
+    int m = grid[0].size();
+    for(int i=0; i<n; i++){
+        for(int j=0; j<m;j++){
+            if(grid[i][j] == 1) freshOranges++;
+            else if(grid[i][j] == 2) q.push({i,j}); // multi source bfs step
+        }
+    }
+    // we have added all the src
+    q.push({-1, -1});
+    int mins = 0;
+    vector<vector<int>> dir = {{-1,0},{1,0},{0,-1},{0,1}};
+    while(not q.empty()){
+        auto cell = q.front();
+        q.pop();
+        if(cell.first == -1 and cell.second == -1){
+            if(not q.empty()){
+                mins++;
+                q.push({-1, -1});
+            }
+            else break;
+        }
+        else{
+            int i = cell.first;
+            int j = cell.second;
+            for(int d=0; d<4; d++){
+                int neighborsRow = i + dir[d][0];
+                int neighborsCols = j + dir[d][1];
+                if(neighborsRow < 0 or neighborsCols < 0 or neighborsRow >= n or neighborsCols >= m) continue;
+                if(grid[neighborsRow][neighborsCols] == 2 or grid[neighborsRow][neighborsCols] == 0) continue;
+                freshOranges--;
+                grid[neighborsRow][neighborsCols] = 2;
+                q.push({neighborsRow, neighborsCols});
+            }
+        }
+    }
+    return (freshOranges == 0) ? mins : -1;
 }
+
 int main(){
-    
+    // Example usage
+    vector<vector<int>> grid = {{2,1,1},{1,1,0},{0,1,1}};
+    int result = orangesRotting(grid);
+    cout << "Minimum minutes to rot all oranges: " << result << endl;
     return 0;
 }
