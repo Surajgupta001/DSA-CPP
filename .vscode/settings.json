@@ -13,7 +13,9 @@
     "new": "cpp",
     "vector": "cpp",
     "bitset": "cpp",
-    "valarray": "cpp"
+    "valarray": "cpp",
+    "string": "cpp",
+    "unordered_map": "cpp"
   },
   "C_Cpp.errorSquiggles": "enabled",
   "C_Cpp_Runner.cCompilerPath": "gcc",
