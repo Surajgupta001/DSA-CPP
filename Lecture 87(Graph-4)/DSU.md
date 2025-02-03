@@ -3,6 +3,7 @@ Disjoint Set Union (DSU) is a data structure used to manage a set of elements pa
 
 # Key Operations
 Find: Find the representative (or parent) of a set that an element belongs to.
+<br>
 Union: Merge two sets into a single set.
 
 # Implementation
