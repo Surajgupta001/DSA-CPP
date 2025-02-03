@@ -82,8 +82,9 @@ The unionSets operation merges two sets by attaching the root of one set to the 
 # Time Complexity
 The time complexity of the DSU operations is:
 
-=> find: O(α(n)), where α(n) is the inverse Ackermann function, which grows very slowly.
-=> unionSets: O(α(n))
+find: O(α(n)), where α(n) is the inverse Ackermann function, which grows very slowly.
+<br>
+unionSets: O(α(n))
 
 # Space Complexity
 The space complexity of the DSU implementation is O(n), where n is the number of vertices in the graph.
