@@ -6,6 +6,8 @@ Find: Find the representative (or parent) of a set that an element belongs to.
 Union: Merge two sets into a single set.
 
 # Implementation
+```cpp
+
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -68,7 +70,7 @@ int main(){
     }
     return 0;
 }
-
+```
 # Explanation
 The DSU implementation uses two vectors: parent and rank. The parent vector stores the representative (or parent) of each set, while the rank vector stores the rank of each set.
 
