@@ -1,11 +1,11 @@
-## Kahn's Algorithm
+# Kahn's Algorithm
 
 Kahn's algorithm is a popular algorithm for performing topological sorting on a directed acyclic graph (DAG). It was first proposed by Arthur B. Kahn in 1962.
 
-# Overview
+## Overview
 Kahn's algorithm works by repeatedly removing nodes with no incoming edges from the graph and adding them to the result. The algorithm terminates when all nodes have been removed from the graph, or when a cycle is detected.
 
-# Step-by-Step Explanation
+## Step-by-Step Explanation
 Here is a step-by-step explanation of Kahn's algorithm:
 
 1. Create a graph: Represent the dependencies as a directed graph, where each node represents a task or a module, and a directed edge from node u to node v indicates that task u depends on task v.
@@ -15,7 +15,7 @@ Here is a step-by-step explanation of Kahn's algorithm:
 5. Repeat steps 2-4: Continue removing nodes with no incoming edges until the graph is empty.
 6. Check for cycles: If the graph is not empty after removing all nodes with no incoming edges, it means there is a cycle in the graph, and the dependencies cannot be resolved.
 
-# Example Walkthrough
+## Example Walkthrough
 Suppose we have a graph representing dependencies between tasks:
 
 * Task A depends on tasks B and C.
@@ -23,12 +23,12 @@ Suppose we have a graph representing dependencies between tasks:
 * Task C depends on task D.
 * Task D has no dependencies.
 
-The graph can be represented as:
+The graph can be represented as:<br>
 
-A -> B
-A -> C
-B -> D
-C -> D
+A -> B <br>
+A -> C <br>
+B -> D <br>
+C -> D <br>
 
 Here is a step-by-step walkthrough of Kahn's algorithm:
 

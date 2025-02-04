@@ -1,20 +1,20 @@
-## Dependency Resolution in Graph
+# Dependency Resolution in Graph
 
-# Problem Statement
+## Problem Statement
 
 Given a directed acyclic graph (DAG) representing dependencies between nodes, resolve the dependencies by ordering the nodes in a way that for every edge (u, v), node u comes before node v in the ordering.
 
-# Approach
+## Approach
 We can use the topological sorting algorithm to resolve dependencies in a graph. Topological sorting is a linear ordering of vertices in a DAG such that for every directed edge u -> v, vertex u comes before v in the ordering.
 
-# Algorithm
+## Algorithm
 1. Create a graph: Represent the dependencies as a directed graph, where each node represents a task or a module, and a directed edge from node u to node v indicates that task u depends on task v.<br>
 1. Find all nodes with no incoming edges: These nodes have no dependencies and can be resolved first.<br>
 3. Remove nodes with no incoming edges: Remove these nodes from the graph and add them to the result.<br>
 4. Repeat steps 2-3: Continue removing nodes with no incoming edges until the graph is empty.<br>
 5. Check for cycles: If the graph is not empty after removing all nodes with no incoming edges, it means there is a cycle in the graph, and the dependencies cannot be resolved.
 
-# Example Use Case
+## Example Use Case
 Suppose we have a graph representing dependencies between tasks:
 
 * Task A depends on tasks B and C.
@@ -23,10 +23,10 @@ Suppose we have a graph representing dependencies between tasks:
 * Task D has no dependencies.<br>
 The topological sorting of this graph would be: D, B, C, A.<br>
 The graph can be represented as:<br>
-A -> B
-A -> C
-B -> D
-C -> D
+A -> B <br>
+A -> C <br>
+B -> D <br>
+C -> D <br>
 <br>
 Using the topological sorting algorithm, we can resolve the dependencies as follows:<br>
 
@@ -38,7 +38,7 @@ Remove nodes B and C: A -> B (removed), A -> C (removed)<br>
 6. Remove node A: (graph is empty)<br>
 The resolved dependencies are: D, B, C, A<br>
 
-Code Implementation
+Code Implementation<br>
 Here is a sample implementation of the topological sorting algorithm in C++:
 
 ```cpp
