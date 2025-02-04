@@ -3,12 +3,14 @@
 using namespace std;
 
 int find(vector<int>& parent, int x){
+    // Time Complexity : O(log*n)
     // This method return which group/clustor x belongs to
     // It is used to find the root of a tree
     return parent[x] = (parent[x] == x) ? x : find(parent, parent[x]);
 }
 
 void Union(vector<int>& parent, vector<int>& rank, int a, int b){
+    // Time Complexity : O(log*n)
     // This method is used to merge two clusters
     a = find(parent, a);
     b = find(parent, b);
