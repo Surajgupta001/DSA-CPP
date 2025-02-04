@@ -1,9 +1,3 @@
-/*
-Dependency Resolution in Graph
-Problem Statement
-Given a directed acyclic graph (DAG) representing dependencies between nodes, resolve the dependencies by ordering the nodes in a way that for every edge (u, v), node u comes before node v in the ordering.
-*/
-
 #include <iostream>
 #include <vector>
 #include <list>
