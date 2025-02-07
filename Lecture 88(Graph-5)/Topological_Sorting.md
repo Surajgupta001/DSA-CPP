@@ -18,7 +18,7 @@ There are several algorithms to perform topological sorting, including:
 ## Topological Sorting in C++
 Here is an implementation of topological sorting in C++ using Kahn's algorithm and DFS:
 
-**_**Kahn's Algorithm
+**Kahn's Algorithm**
 ```cpp
 #include <iostream>
 #include <vector>
@@ -90,7 +90,7 @@ int main() {
 }
 ```
 
-**_**DFS Algorithm
+**DFS Algorithm**
 ```cpp
 #include <iostream>
 #include <vector>
