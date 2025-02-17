@@ -71,6 +71,64 @@ vector<vector<string>>nQueen(int n){
     helper(0, n);
 }
 
+/*
+========= Leetcode Submission ==============
+vector<vector<char>> grid;
+vector<vector<string>> ans;
+
+bool canPlaceQueen(int row, int col, int n){
+    // column check
+    for(int i=row-1; i>=0; i--){
+        if(grid[i][col] == 'Q'){ // we are attacked
+            return false;
+        }
+    }
+    // left diag check
+    for(int i=row-1, j=col-1; i>=0 and j>=0; i--, j--){
+        if(grid[i][j] == 'Q'){ // we are attacked
+            return false;
+        }
+    }
+    // right diag check
+    for(int i=row-1, j=col+1; i>=0 and j<n; i--, j++){
+        if(grid[i][j] == 'Q'){ // we are attacked
+            return false;
+        }
+    }
+    return true; // no attacked
+}
+
+void helper(int row, int n){
+    if(row == n){
+        // We got one possible ans
+        vector<string> temp;
+        for(int i=0; i<n; i++){
+            string result = "";
+            for(int j=0; j<n; j++){
+                result += grid[i][j];
+            }
+            temp.push_back(result);
+        }
+        ans.push_back(temp);
+    }
+    for(int col=0; col<n; col++){
+        if(canPlaceQueen(row, col, n)){
+            grid[row][col] = 'Q';
+            helper(row + 1, n);
+            grid[row][col] = '.';
+        }
+    }
+}
+
+vector<vector<string>>solveNQueens(int n){
+    grid.clear();
+    ans.clear();
+    grid.resize(n, vector<char>(n,'.'));
+    helper(0, n);
+    return ans; 
+}
+*/ 
+
 int main(){
     
     int n = 4;
