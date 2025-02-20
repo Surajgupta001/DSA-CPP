@@ -1,0 +1,12 @@
+What -> User made data structure.
+why -> Range queries questions can be solved very efficiently using segment trees.
+
+what is segment trees ?
+-> Segment tree is a binary tree where each node represents a segment of the array.
+-> Each node in the segment tree contains the information of the segment it represents.
+-> The root node represents the entire array.
+-> The left child of a node represents the left half of the segment represented by the node.
+-> The right child of a node represents the right half of the segment represented by the node.
+-> The leaf nodes represent the individual elements of the array.
+-> The segment tree is constructed by recursively dividing the array into two halves until each element is a leaf
+
