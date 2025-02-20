@@ -14,17 +14,17 @@ void buildTree(vector<int>& v, int i, int low, int high) {
     int mid = low + (high - low) / 2;
     buildTree(v, 2 * i + 1, low, mid);     // Left subtree
     buildTree(v, 2 * i + 2, mid + 1, high); // Right subtree
-    segmentTree[i] = max(segmentTree[2 * i + 1], segmentTree[2 * i + 2]);
+    segmentTree[i] = min(segmentTree[2 * i + 1], segmentTree[2 * i + 2]);
 }
 
-// Query the maximum in the range [left, right]
-int getMax(int i, int low, int high, int &left, int &right) {
-    if (low > right || high < left) return INT_MIN; // Completely outside range
+// Query the minimum in the range [left, right]
+int getMin(int i, int low, int high, int &left, int &right) {
+    if (low > right || high < left) return INT_MAX; // Completely outside range
     if (low >= left && high <= right) return segmentTree[i]; // Completely inside range
     int mid = low + (high - low) / 2;
-    int leftMax = getMax(2 * i + 1, low, mid, left, right);
-    int rightMax = getMax(2 * i + 2, mid + 1, high, left, right);
-    return max(leftMax, rightMax);
+    int leftMin = getMin(2 * i + 1, low, mid, left, right);
+    int rightMin = getMin(2 * i + 2, mid + 1, high, left, right);
+    return min(leftMin, rightMin);
 }
 
 int main() {
@@ -41,8 +41,8 @@ int main() {
         int l, r;
         cout << "Enter the range (l r): ";
         cin >> l >> r;
-        int maxVal = getMax(0, 0, n - 1, l, r);
-        cout<<"Maximum Element in given range is: "<<maxVal<<endl;
+        int minVal = getMin(0, 0, n - 1, l, r);
+        cout<<"Minimum Element in given range is: "<<minVal<<endl;
     }
     return 0;
 }
