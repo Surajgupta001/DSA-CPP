@@ -138,23 +138,21 @@ A Strongly Connected Component (SCC) is a subgraph of a directed graph where the
 
 Kosaraju's algorithm is a linear-time algorithm for finding SCCs in a directed graph. The algorithm consists of the following steps:
 
-### Step 1: Perform DFS on the Original Graph
-
 * Step 1: Perform DFS on the original Graph
 
-- Perform a depth-first search (DFS) on the original graph to fill a stack with vertices in the order they finish.
-- This step is implemented in the fillStack function.
+    - Perform a depth-first search (DFS) on the original graph to fill a stack with vertices in the order they finish.
+    - This step is implemented in the fillStack function.
 
 * Step 2: Create the Transpose Graph
 
-- Create the transpose graph by reversing the direction of all edges in the original graph.
-- This step is implemented in the findStronglyConnectedComponents function.
+    - Create the transpose graph by reversing the direction of all edges in the original graph.
+    - This step is implemented in the findStronglyConnectedComponents function.
 
 * Step 3: Perform DFS on the Transpose Graph
 
-- Perform a DFS on the transpose graph to find SCCs.
-- Start the DFS from the top vertex in the stack and explore all reachable vertices.
-- This step is implemented in the findSCC function.
+    - Perform a DFS on the transpose graph to find SCCs.
+    - Start the DFS from the top vertex in the stack and explore all reachable vertices.
+    - This step is implemented in the findSCC function.
 
 * Step 4: Output the SCCs
 
