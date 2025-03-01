@@ -45,24 +45,22 @@ string helper(string str1, string str2, int m, int n) {
 }
 */ 
 
-string helper(string &str1, string &str2, int m, int n, vector<vector<string>>& dp){
+string helper(string &str1, string &str2, int m, int n, vector<vector<string>>& dp){ // Memory exceed limit
     // Base Case: If one of the strings is empty, return the other string
-    if(m == 0) return str2.substr(0, n);
-    if(n == 0) return str1.substr(0, m);
+    if (m == 0) return str2.substr(0, n);
+    if (n == 0) return str1.substr(0, m);
 
-    // If the result is ready computed, return it from ths DP table
-    if(dp[m][n] != "") return dp[m][n];
-    // if(!dp[m][n].empty()) return dp[m][n];
+    // If the result is already computed, return it from the DP table
+    if (!dp[m][n].empty()) return dp[m][n];
 
-    // if the last character of both strings are the same, add it to result
-    if(str1[m - 1] == str2[n - 1]){
-        dp[m][n] = helper(str1, str2, m-1, n-1, dp) + str1[m-1];
-    }
-    else{
-        // Otherwise, try both possibilities and return the shorter one 
+    // If the last characters of both strings are the same, add it to the result
+    if (str1[m - 1] == str2[n - 1]) {
+        dp[m][n] = helper(str1, str2, m - 1, n - 1, dp) + str1[m - 1];
+    } else {
+        // Otherwise, try both possibilities and choose the shorter one
         string left = helper(str1, str2, m - 1, n, dp);
         string right = helper(str1, str2, m, n - 1, dp);
-        dp[m][n] = (left.length() < right.length()) ? left + str1[m-1] : right + str2[n-1];
+        dp[m][n] = (left.length() < right.length()) ? left + str1[m - 1] : right + str2[n - 1];
     }
     return dp[m][n];
 }
@@ -70,9 +68,68 @@ string helper(string &str1, string &str2, int m, int n, vector<vector<string>>& 
 string shortestCommonSupersequence(string str1, string str2) {
     int m = str1.length();
     int n = str2.length();
-    vector<vector<string>> dp(m+1, vector<string>(n+1, ""));
+    vector<vector<string>> dp(m + 1, vector<string>(n + 1, ""));
     return helper(str1, str2, m, n, dp);
 }
+
+/*
+============= Tabulation (Avoid Memory Exceed Limit) ===================
+                    More efficient than memoization
+
+string shortestCommonSupersequence(string str1, string str2) {
+    int m = str1.length();
+    int n = str2.length();
+
+    // DP table to store the lengths of the shortest common supersequence
+    vector<vector<int>> dp(m + 1, vector<int>(n + 1, 0));
+
+    // Fill the DP table
+    for (int i = 0; i <= m; i++) {
+        for (int j = 0; j <= n; j++) {
+            if (i == 0) {
+                dp[i][j] = j;
+            } else if (j == 0) {
+                dp[i][j] = i;
+            } else if (str1[i - 1] == str2[j - 1]) {
+                dp[i][j] = 1 + dp[i - 1][j - 1];
+            } else {
+                dp[i][j] = 1 + min(dp[i - 1][j], dp[i][j - 1]);
+            }
+        }
+    }
+
+    // Reconstruct the shortest common supersequence from the DP table
+    string result;
+    int i = m, j = n;
+    while (i > 0 && j > 0) {
+        if (str1[i - 1] == str2[j - 1]) {
+            result.push_back(str1[i - 1]);
+            i--;
+            j--;
+        } else if (dp[i - 1][j] < dp[i][j - 1]) {
+            result.push_back(str1[i - 1]);
+            i--;
+        } else {
+            result.push_back(str2[j - 1]);
+            j--;
+        }
+    }
+
+    // Append the remaining characters of str1 or str2
+    while (i > 0) {
+        result.push_back(str1[i - 1]);
+        i--;
+    }
+    while (j > 0) {
+        result.push_back(str2[j - 1]);
+        j--;
+    }
+
+    // Reverse the result to get the correct order
+    reverse(result.begin(), result.end());
+    return result;
+}
+*/ 
 
 int main(){
     
