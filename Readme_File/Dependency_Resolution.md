@@ -42,7 +42,7 @@ Remove nodes B and C: A -> B (removed), A -> C (removed)<br>
 6. Remove node A: (graph is empty)<br>
 The resolved dependencies are: D, B, C, A<br>
 
-Code Implementation<br>
+## Code Implementation<br>
 Here is a sample implementation of the topological sorting algorithm in C++:
 
 ```cpp
