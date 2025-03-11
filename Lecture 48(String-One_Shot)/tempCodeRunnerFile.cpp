@@ -1,1 +1,0 @@
-cout<<"Longest common prefix: "<<LongestCommonPrefix(str)<<endl;
