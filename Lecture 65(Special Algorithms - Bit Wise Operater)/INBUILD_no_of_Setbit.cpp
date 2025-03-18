@@ -10,11 +10,10 @@ int countSetBits(int n){
 
 int main(){
 
-    // int n;
-    // cout<<"Enter decimal number: ";
-    // cin>>n;
+    int n;
+    cout<<"Enter decimal number: ";
+    cin>>n;
 
-    int n = 6;
 
     cout<<"Numbers of 1's: "<<countSetBits(n)<<endl;
 
