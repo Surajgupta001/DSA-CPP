@@ -44,7 +44,28 @@ questions[i].length == 2
 #include <algorithm>
 using namespace std;
 
-// Using Memoization (Top-Down DP) to solve the problem
+// Using Recursion with Memoization to solve the problem
+long long helper(int n, int i, vector<vector<int>>& questions, vector<long long>& dp){
+    if(i >= n) return 0; // Base case: no more questions to solve
+    if(dp[i] != -1) return dp[i]; // Check if already computed
+    
+    // Option 1: Solve the current question
+    long long solve = questions[i][0] + helper(n, i + questions[i][1] + 1, questions, dp);
+    
+    // Option 2: Skip the current question
+    long long skip = helper(n, i + 1, questions, dp);
+
+    return dp[i] = max(solve, skip); // Store the result in dp[i]
+}
+
+long long mostPoints(vector<vector<int>>& questions){
+    int n = questions.size();
+    vector<long long> dp(n, -1); // Initialize dp array with -1 (not computed)
+    return helper(n, 0, questions, dp); // Start from the first question
+}
+
+/*
+========== Using Tabulation (Bottom-Up DP) to solve the problem ======
 long long mostPoints(vector<vector<int>>& questions){
     int n = questions.size();
     vector<long long> dp(n + 1, 0);// dp[i] is the max points we can get from the first i questions
@@ -53,29 +74,7 @@ long long mostPoints(vector<vector<int>>& questions){
     }
     return dp[0];
 }
-
-/*
-long long mostPoints(vector<vector<int>> &questions){
-    int n = questions.size();
-    vector<long long> dp(n + 1, 0);
-    for (int i = n - 1; i >= 0; --i){
-        int points = questions[i][0];
-        int brainpower = questions[i][1];
-
-        // Solve the current question
-        long long solve = points;
-        if (i + brainpower + 1 <= n){
-            solve += dp[i + brainpower + 1];
-        }
-        // Skip the current question
-        long long skip = dp[i + 1];
-
-        // Update the maximum points
-        dp[i] = max(solve, skip);
-    }
-    return dp[0];
-}
-*/
+*/ 
  
 int main(){
         
