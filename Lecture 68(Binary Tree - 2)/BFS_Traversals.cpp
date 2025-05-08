@@ -62,7 +62,6 @@ void nthLevelRev(node *root, int curr_level, int level){
     nthLevelRev(root->left, curr_level+1, level); // Left Recursion
 }
 
-// Level Order Traversals - (Using BFS)
 void levelOrderRev(node *root){
     int n = levels(root);
     for(int i=1;i<=n;i++){
