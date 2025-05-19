@@ -8,7 +8,7 @@ void permutations(string &str, int i){
         cout<<str<< endl;
         return;
     }
-    unordered_set<char>s;
+    unordered_set<char>s; // To avoid String Repetitions -> To Keep Unordered_Set
     for(int idx = i; idx < str.length(); idx++){
         if(s.count(str[idx])) continue;
         s.insert(str[idx]);
