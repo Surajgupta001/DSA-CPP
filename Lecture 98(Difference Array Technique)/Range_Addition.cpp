@@ -12,6 +12,15 @@ Example 1:
 Input: length = 5, updates = [[1,3,2],[2,4,3],[0,2,-2]]
 Output: [-2,0,3,5,3]
 
+Explanation:
+Initial arr = [0,0,0,0,0]
+After applying the first update [1,3,2]:
+arr = [0,2,2,2,0]
+After applying the second update [2,4,3]:
+arr = [0,2,5,5,3]
+After applying the third update [0,2,-2]:
+arr = [-2,0,3,5,3]
+
 Example 2:
 
 Input: length = 10, updates = [[2,4,6],[5,6,8],[1,9,-4]]
@@ -31,7 +40,7 @@ using namespace std;
 
 vector<int> getModifiedArray(int length, vector<vector<int>>& updates){
     
-    // Initialize the differnce array
+    // Initialize the differnce array with zeros and size of length
     vector<int> diff(length, 0);
 
     // Step 1 : Apply update using the difference array
@@ -45,6 +54,7 @@ vector<int> getModifiedArray(int length, vector<vector<int>>& updates){
             diff[right + 1] -= value; // Subtract increment after endIndex
         }
     }
+    
     // Step 2 : Compute the final array form the differnce array
     vector<int> ans(length, 0);
     int prefixSum = 0;
@@ -56,6 +66,7 @@ vector<int> getModifiedArray(int length, vector<vector<int>>& updates){
 }
 
 int main(){
+    
     int length = 5;
     
     vector<vector<int>> updates = {{1,3,2},{2,4,3},{0,2,-2}};
