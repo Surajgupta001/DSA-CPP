@@ -54,8 +54,79 @@ queries[i].length == 2
 
 #include <iostream>
 #include <vector>
+#include <queue>
+#include <algorithm>
 using namespace std;
 
-int maxRemoval(vector<int>& nums, vector<vector<int>>& queries) {
+int maxRemoval(vector<int> &nums, vector<vector<int>> &queries){
+    int Q = queries.size();
+    int n = nums.size();
 
+    // Sort queries based on starting index & If starting index is same, sort based on ending index
+    sort(queries.begin(), queries.end());
+
+    // To store farthest ending index of queries
+    priority_queue<int> maxHeap; // Max Heap
+
+    // To store past ending index of queries
+    priority_queue<int, vector<int>, greater<int>> past; // Min Heap
+
+    int j = 0;         // Pointing to queries
+    int usedCount = 0; // How many queries I have used
+
+    for (int i = 0; i < n; i++){
+        
+        // While queries are starting at i, push them into maxHeap
+        while (j < Q and queries[j][0] == i){
+            
+            // Push the ending index of queries into maxHeap
+            maxHeap.push(queries[j][1]);
+            j++;
+        }
+
+        // First Check if we can impact current i from any past queries ending
+        nums[i] -= past.size();
+
+        // If we can impact current i from past queries ending, pop them
+        while (nums[i] > 0 and !maxHeap.empty() and maxHeap.top() >= i){
+            // Pop the farthest ending index of queries
+            int ending = maxHeap.top();
+            
+            // Pop the farthest ending index of queries
+            maxHeap.pop();
+            
+            // Push the ending index of queries into past
+            past.push(ending);
+            
+            usedCount++;
+            nums[i]--;
+        }
+
+        // If we can't impact current i from any past queries ending, return -1
+        if (nums[i] > 0) return -1;
+
+        // If we can impact current i from any past queries ending, pop them
+        while (!past.empty() and past.top() <= i){
+            // Pop the past ending index of queries
+            past.pop();
+        }
+    }
+
+    return Q - usedCount;
+}
+
+int main(){
+    vector<int> nums1 = {2, 0, 2};
+    vector<vector<int>> queries1 = {{0, 2}, {0, 2}, {1, 1}};
+    cout << "Example 1: " << maxRemoval(nums1, queries1) << endl; // Expected: 1
+
+    vector<int> nums2 = {1, 1, 1, 1};
+    vector<vector<int>> queries2 = {{1, 3}, {0, 2}, {1, 3}, {1, 2}};
+    cout << "Example 2: " << maxRemoval(nums2, queries2) << endl; // Expected: 2
+
+    vector<int> nums3 = {1, 2, 3, 4};
+    vector<vector<int>> queries3 = {{0, 3}};
+    cout << "Example 3: " << maxRemoval(nums3, queries3) << endl; // Expected: -1
+
+    return 0;
 }
