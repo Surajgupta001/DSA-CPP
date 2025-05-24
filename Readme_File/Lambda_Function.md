@@ -9,25 +9,30 @@ A lambda function in C++ is a small anonymous function that can be defined inlin
 The syntax for a lambda function in C++ is as follows:
 
 ```cpp
-[capture](parameters) -> return-type
-{
+auto lambda = [capture](parameters){ // -> return-type
     function-body
 }
 ```
 
-- Capture: Specifies how the lambda function captures variables from the surrounding scope.
-- Parameters: The input parameters of the lambda function.
-- Return-type: The return type of the lambda function. If omitted, the return type is deduced by the compiler.
-- Function-body: The code that is executed when the lambda function is called.
+- `Capture` : Specifies how the lambda function captures variables from the surrounding scope.
+- `Parameters` : The input parameters of the lambda function.
+- `Return-type` : The return type of the lambda function. If omitted, the return type is deduced by the compiler.
+- `Function-body` : The code that is executed when the lambda function is called.
 
 ## Capture Options
 
-The capture option specifies how the lambda function captures variables from the surrounding scope. The following capture options are available:
+In C++, lambda functions can capture variables from their enclosing scope. The capture clause (inside the square brackets `[]`) specifies which variables are captured and how:
 
-- [=]: Capture all variables by value.
-- [&]: Capture all variables by reference.
-- [this]: Capture the this pointer by value.
-- [=x, &y]: Capture x by value and y by reference.
+- `[=]` : Capture all automatic variables used in the lambda by value.
+- `[&]` : Capture all automatic variables used in the lambda by reference.
+- `[x]` : Capture variable `x` by value.
+- `[&x]` : Capture variable `x` by reference.
+- `[=, &y]` : Capture all variables by value, but capture `y` by reference.
+- `[&, x]` : Capture all variables by reference, but capture `x` by value.
+- `[this]` : Capture the `this` pointer by value (used in member functions).
+- `[=, this]` : Capture all variables by value and the `this` pointer.
+
+Capturing by value means the lambda gets its own copy of the variable, while capturing by reference means the lambda can modify the original variable.
 
 ## Example Use Cases
 
@@ -36,8 +41,7 @@ The capture option specifies how the lambda function captures variables from the
 ### 1. Simple Lambda Function
 
 ```cpp
-int main()
-{
+int main(){
     auto add = [](int x, int y) { return x + y; };
     cout << add(5, 3)<<endl;  // Outputs: 8
     return 0;
@@ -47,8 +51,7 @@ int main()
 ### 2. Capturing Variable
 
 ```cpp
-int main()
-{
+int main(){
     int x = 5;
     auto add = [x](int y) { return x + y; };
     cout << add(3) << endl;  // Outputs: 8
@@ -59,8 +62,7 @@ int main()
 ### 3. Capturing Variables by Reference
 
 ```cpp
-int main()
-{
+int main(){
     int x = 5;
     auto add = [&x](int y) { x += y; return x; };
     cout << add(3) << endl;  // Outputs: 8
@@ -68,6 +70,49 @@ int main()
     return 0;
 }
 ```
+
+## Using Lambda Functions with STL Algorithms
+
+C++ STL provides several algorithms that work seamlessly with lambda functions. Some commonly used ones are:
+
+- `std::any_of`: Returns `true` if any element in a range satisfies a condition.
+- `std::all_of`: Returns `true` if all elements in a range satisfy a condition.
+- `std::none_of`: Returns `true` if no elements in a range satisfy a condition.
+- `std::find_if`: Returns an iterator to the first element that satisfies a condition.
+
+### Example: Using `any_of`, `all_of`, `none_of`, and `find_if`
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int main() {
+    vector<int> v = {1, 2, 3, 4, 5};
+
+    // Check if any element is even
+    bool anyEven = any_of(v.begin(), v.end(), [](int x) { return x % 2 == 0; });
+    cout << "Any even? " << anyEven << endl; // Outputs: 1 (true)
+
+    // Check if all elements are positive
+    bool allPositive = all_of(v.begin(), v.end(), [](int x) { return x > 0; });
+    cout << "All positive? " << allPositive << endl; // Outputs: 1 (true)
+
+    // Check if none of the elements are negative
+    bool noneNegative = none_of(v.begin(), v.end(), [](int x) { return x < 0; });
+    cout << "None negative? " << noneNegative << endl; // Outputs: 1 (true)
+
+    // Find the first element greater than 3
+    auto it = find_if(v.begin(), v.end(), [](int x) { return x > 3; });
+    if (it != v.end())
+        cout << "First element > 3: " << *it << endl; // Outputs: 4
+
+    return 0;
+}
+```
+
+These algorithms are powerful when combined with lambda functions, making code concise and expressive.
 
 ## Advantages
 
