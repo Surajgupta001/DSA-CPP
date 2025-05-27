@@ -3,9 +3,11 @@
 Kahn's algorithm is a popular algorithm for performing topological sorting on a directed acyclic graph (DAG). It was first proposed by Arthur B. Kahn in 1962.
 
 ## Overview
+
 Kahn's algorithm works by repeatedly removing nodes with no incoming edges from the graph and adding them to the result. The algorithm terminates when all nodes have been removed from the graph, or when a cycle is detected.
 
 ## Step-by-Step Explanation
+
 Here is a step-by-step explanation of Kahn's algorithm:
 
 1. Create a graph: Represent the dependencies as a directed graph, where each node represents a task or a module, and a directed edge from node u to node v indicates that task u depends on task v.
@@ -16,6 +18,7 @@ Here is a step-by-step explanation of Kahn's algorithm:
 6. Check for cycles: If the graph is not empty after removing all nodes with no incoming edges, it means there is a cycle in the graph, and the dependencies cannot be resolved.
 
 ## Example Walkthrough
+
 Suppose we have a graph representing dependencies between tasks:
 
 * Task A depends on tasks B and C.
@@ -23,12 +26,12 @@ Suppose we have a graph representing dependencies between tasks:
 * Task C depends on task D.
 * Task D has no dependencies.
 
-The graph can be represented as:<br>
+The graph can be represented as:
 
-A -> B <br>
-A -> C <br>
-B -> D <br>
-C -> D <br>
+1. A -> B
+2. A -> C
+3. B -> D
+4. C -> D
 
 Here is a step-by-step walkthrough of Kahn's algorithm:
 
@@ -43,7 +46,9 @@ Here is a step-by-step walkthrough of Kahn's algorithm:
 
 The resolved dependencies are: D, B, C, A
 
-# Pseudocode
+## Pseudocode
+
+Kahn's algorithm can be implemented using a queue to keep track of nodes with no incoming edges (in-degree of zero). The algorithm iteratively removes these nodes and updates the in-degrees of their neighbors until all nodes are processed or a cycle is detected.
 Here is a pseudocode implementation of Kahn's algorithm:
 
 ```cpp
@@ -78,8 +83,83 @@ function Kahn'sAlgorithm(graph):
 
     return result
 ```
-# Time Complexity
+
+## Khan's Algorithms
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <list>
+#include <queue>
+#include <unordered_set>
+using namespace std;
+
+vector<list<int>> graph;
+int v; // no of vertex;
+void add_edge(int a, int b, bool biDir = true){
+    graph[a].push_back(b);
+    if(biDir) graph[b].push_back(a);
+}
+
+void topoBFS(){
+    // Kahn algorithms
+    vector<int> indegree(v, 0);
+    for(int i = 0; i < v; i++){
+        for(auto neighbour : graph[i]){
+            // i -> neighbours
+            indegree[neighbour]++;
+        }
+    }
+    // Create a queue and enqueue all vertices with indegree 0
+    queue<int>q;
+    unordered_set<int> visited;
+    for(int i = 0; i < v; i++){
+        if(indegree[i] == 0){
+            q.push(i);
+            visited.insert(i);
+        }
+    }
+    // Process all vertices in the queue
+    while(!q.empty()){
+        int node = q.front();
+        q.pop();
+        // Process this node
+        cout<<node<<" ";
+        for(auto neighbour : graph[node]){
+            if(not visited.count(neighbour)){
+                indegree[neighbour]--;
+                if(indegree[neighbour] == 0){
+                    q.push(neighbour);
+                    visited.insert(neighbour);
+                }
+            }
+        }
+    }
+}
+int main(){
+    
+    cout<<"Enter the number of vertex: ";
+    cin>>v;
+
+    int e;
+    cout<<"Enter the number of edges: ";
+    cin>>e;
+
+    graph.resize(v, list<int>());
+    while(e--){
+        int x, y;
+        cin>>x>>y;
+        add_edge(x, y, false);
+    }
+    topoBFS();
+    return 0;
+}
+```
+
+## Time Complexity
+
 The time complexity of Kahn's algorithm is O(V + E), where V is the number of vertices (nodes) and E is the number of edges in the graph. This is because we need to iterate over all nodes and edges to perform the topological sorting.
 
-# Space Complexity
+## Space Complexity
+
 The space complexity of Kahn's algorithm is O(V), where V is the number of vertices (nodes) in the graph. This is because we need to store the in-degree of each node and the result of the topological sorting.
