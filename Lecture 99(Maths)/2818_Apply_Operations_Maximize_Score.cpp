@@ -1,5 +1,6 @@
 /*
 Apply Operations to Maximize Score - [Leetcode - 2818(Hard)]
+--------------------------------------------------------------
 You are given an array nums of n positive integers and an integer k.
 
 Initially, you start with a score of 1. You have to maximize your score by applying the following operation at most k times:
@@ -51,14 +52,14 @@ Constraints:
 #include <cmath>
 using namespace std;
 
-const int MOD = 1e9 + 7;
+const int mod = 1e9 + 7;
 
 long long findPower(long long a, long long b){
     if (b == 0) return 1;
     long long half = findPower(a, b / 2);
-    long long result = (half * half) % MOD;
+    long long result = (half * half) % mod;
     if (b % 2 == 1){
-        result = (result * a) % MOD;
+        result = (result * a) % mod;
     }
     return result;
 }
@@ -164,11 +165,12 @@ int maximumScore(vector<int> &nums, int k){
 
     int idx = 0; // start from largest element greedily
     while (k > 0){ // O(k * log(operations))
-        auto [num, i] = sortedNums[idx];
+        int num = sortedNums[idx].first;
+        int i = sortedNums[idx].second;
 
         long long operations = min((long long)k, (long long)subarrays[i]);
 
-        score = (score * findPower(num, operations)) % MOD;
+        score = (score * findPower(num, operations)) % mod;
 
         k = (k - operations);
         idx++;
