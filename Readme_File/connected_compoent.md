@@ -21,27 +21,27 @@ There are several algorithms for finding connected components in a graph. Here a
 
 A weakly connected graph is a graph in which there is a path from every vertex to every other vertex, but the path may not be directed. In other words, it is possible to reach any vertex from any other vertex by traversing the edges of the graph, but we may need to traverse some edges in the opposite direction.
 
-## Properties:
+## Properties
 
 1. Every vertex is reachable from every other vertex, but the path may not be directed.
 2. The graph may have "dead ends" or vertices that are only reachable in one direction.
 3. The graph may have edges that are only traversable in one direction.
 
-## Characteristics:
+## Characteristics
 
 1. A weakly connected graph may have multiple connected components.
 2. A weakly connected graph is not necessarily strongly connected.
 3. A weakly connected graph may have edges that are only traversable in one direction.
 
-## Types of Weakly Connected Graphs:
+## Types of Weakly Connected Graphs
 
-1. Directed Weakly Connected Graph: A directed graph in which there is a path from every vertex to every other vertex, but the path may not be directed.
-2. Undirected Weakly Connected Graph: An undirected graph in which there is a path from every vertex to every other vertex, but the path may not be directed.
+1. **Directed Weakly Connected Graph:** A directed graph in which there is a path from every vertex to every other vertex, but the path may not be directed.
+2. **Undirected Weakly Connected Graph:** An undirected graph in which there is a path from every vertex to every other vertex, but the path may not be directed.
 
-Algorithms for Checking Weak Connectivity:
+- **Algorithms for Checking Weak Connectivity:**
 
-1. Depth-First Search (DFS): DFS can be used to check if a graph is weakly connected by traversing the graph from a given vertex and checking if all vertices are visited.
-2. Breadth-First Search (BFS): BFS can also be used to check if a graph is weakly connected by traversing the graph from a given vertex and checking if all vertices are visited.
+1. **Depth-First Search (DFS):** DFS can be used to check if a graph is weakly connected by traversing the graph from a given vertex and checking if all vertices are visited.
+2. **Breadth-First Search (BFS):** BFS can also be used to check if a graph is weakly connected by traversing the graph from a given vertex and checking if all vertices are visited.
 
 ```cpp
 #include <iostream>
@@ -107,7 +107,7 @@ int main(){
 }
 ```
 
-## Time Complexity
+## Time Complexity for Weakly Connected Components
 
 The time complexity of finding weakly connected components in a directed graph is O(V + E), where:
 
@@ -115,13 +115,12 @@ V is the number of vertices (nodes) in the graph.
 E is the number of edges in the graph.
 This is because we can use a graph traversal algorithm, such as Depth-First Search (DFS) or Breadth-First Search (BFS), to visit all vertices and edges in the graph.
 
-## Space Complexity
+## Space Complexity for Weakly Connected Components
 
 The space complexity of finding weakly connected components in a directed graph is O(V), where:
 
 V is the number of vertices (nodes) in the graph.
 This is because we need to store the visited vertices and the components they belong to.
-
 
 ## Strongly Connected Component (SCC)
 
@@ -131,32 +130,33 @@ A Strongly Connected Component (SCC) is a subgraph of a directed graph where the
 
 ## Key Properties of SCC
 
-* A path exists from every vertex to every other vertex in the SCC.
-* The SCC is a maximal subgraph, meaning that no additional vertices can be added to the SCC without violating the property of strong connectivity.
+- A path exists from every vertex to every other vertex in the SCC.
+- The SCC is a maximal subgraph, meaning that no additional vertices can be added to the SCC without violating the property of strong connectivity.
 
 ## Kosaraju's Algorithm for Finding SCC
 
 Kosaraju's algorithm is a linear-time algorithm for finding SCCs in a directed graph. The algorithm consists of the following steps:
 
-* Step 1: Perform DFS on the original Graph
+- Step 1: Perform DFS on the original Graph
 
-    - Perform a depth-first search (DFS) on the original graph to fill a stack with vertices in the order they finish.
-    - This step is implemented in the fillStack function.
+  - Perform a depth-first search (DFS) on the original graph to fill a stack with vertices in the order they finish.
+  - This step is implemented in the fillStack function.
 
-* Step 2: Create the Transpose Graph
+- Step 2: Create the Transpose Graph
 
-    - Create the transpose graph by reversing the direction of all edges in the original graph.
-    - This step is implemented in the findStronglyConnectedComponents function.
+  - Create the transpose graph by reversing the direction of all edges in the original graph.
+  - This step is implemented in the findStronglyConnectedComponents function.
 
-* Step 3: Perform DFS on the Transpose Graph
+- Step 3: Perform DFS on the Transpose Graph
 
-    - Perform a DFS on the transpose graph to find SCCs.
-    - Start the DFS from the top vertex in the stack and explore all reachable vertices.
-    - This step is implemented in the findSCC function.
+  - Perform a DFS on the transpose graph to find SCCs.
+  - Start the DFS from the top vertex in the stack and explore all reachable vertices.
+  - This step is implemented in the findSCC function.
 
-* Step 4: Output the SCCs
+- Step 4: Output the SCCs
 
 ## Algorithms
+
 ```cpp
 /*
 Strongly Connected Component (SCC)
@@ -273,7 +273,9 @@ int main(){
 ```
 
 ## Time Complexity
+
 The time complexity of Kosaraju's algorithm is O(V + E), where V is the number of vertices and E is the number of edges in the graph.
 
 ## Space Complexity
+
 The space complexity of Kosaraju's algorithm is O(V + E), where V is the number of vertices and E is the number of edges in the graph.

@@ -1,12 +1,15 @@
 # Disjoint Set Union (DSU)
+
 Disjoint Set Union (DSU) is a data structure used to manage a set of elements partitioned into a number of non-overlapping (or disjoint) subsets. It is commonly used in graph algorithms to find connected components, detect cycles, and perform union operations.
 
-# Key Operations
+## Key Operations
+
 Find: Find the representative (or parent) of a set that an element belongs to.
-<br>
+
 Union: Merge two sets into a single set.
 
-# Implementation
+## Implementation
+
 ```cpp
 
 #include <iostream>
@@ -72,19 +75,23 @@ int main(){
     return 0;
 }
 ```
-# Explanation
+
+## Explanation
+
 The DSU implementation uses two vectors: parent and rank. The parent vector stores the representative (or parent) of each set, while the rank vector stores the rank of each set.
 
 The find operation uses path compression to optimize the search for the representative of a set. If the vertex is not the representative of its set, it recursively calls find on its parent until it reaches the representative.
 
 The unionSets operation merges two sets by attaching the root of one set to the root of the other set. If the ranks of the two sets are equal, it increments the rank of the new root.
 
-# Time Complexity
+## Time Complexity
+
 The time complexity of the DSU operations is:
 
 find: O(α(n)), where α(n) is the inverse Ackermann function, which grows very slowly.
-<br>
+
 unionSets: O(α(n))
 
-# Space Complexity
+## Space Complexity
+
 The space complexity of the DSU implementation is O(n), where n is the number of vertices in the graph.

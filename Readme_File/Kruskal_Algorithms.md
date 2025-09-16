@@ -12,7 +12,8 @@ Here's a step-by-step explanation of the Kruskal algorithm:
 4. Check for Cycle: Check if including the current edge will create a cycle in the graph. If it does, skip the edge.
 5. Add the Edge: If the edge does not create a cycle, add it to the MST and merge the two connected components.
 
-##Kruskal Algorithm Pseudocode
+## Kruskal Algorithm Pseudocode
+
 Here's a pseudocode representation of the Kruskal algorithm:
 
 **Procedure Kruskal(G)**:

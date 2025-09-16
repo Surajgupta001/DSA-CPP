@@ -1,8 +1,11 @@
 # Topological Sorting
-Topological sorting is a linear ordering of vertices in a directed acyclic graph (DAG).<br>
+
+Topological sorting is a linear ordering of vertices in a directed acyclic graph (DAG).
+
 Topological sorting is a linear ordering of vertices in a directed acyclic graph (DAG) such that for every directed edge u -> v, vertex u comes before v in the ordering.
 
 ## Why is Topological Sorting Important?
+
 Topological sorting is used in many applications, including:
 
 1. Scheduling: Topological sorting can be used to schedule tasks that have dependencies on each other.
@@ -10,15 +13,18 @@ Topological sorting is used in many applications, including:
 3. Dependency Resolution: Topological sorting can be used to resolve dependencies between packages or modules in software development.
 
 ## How to Perform Topological Sorting
+
 There are several algorithms to perform topological sorting, including:
 
 1. Kahn's Algorithm: This algorithm works by choosing vertices with no incoming edges and removing them from the graph.
 2. Depth-First Search (DFS): This algorithm works by performing a DFS on the graph and adding vertices to the ordering as they are finished.
 
 ## Topological Sorting in C++
+
 Here is an implementation of topological sorting in C++ using Kahn's algorithm and DFS:
 
-**Kahn's Algorithm**
+### Kahn's Algorithm
+
 ```cpp
 #include <iostream>
 #include <vector>
@@ -90,7 +96,8 @@ int main() {
 }
 ```
 
-**DFS Algorithm**
+### DFS Algorithm
+
 ```cpp
 #include <iostream>
 #include <vector>
@@ -150,4 +157,5 @@ int main() {
     return 0;
 }
 ```
+
 Note that the DFS algorithm has a time complexity of O(V + E), where V is the number of vertices and E is the number of edges, while Kahn's algorithm has a time complexity of O(V + E) in the worst case. However, Kahn's algorithm is generally faster in practice because it avoids the overhead of recursive function calls.
