@@ -59,6 +59,12 @@ int main() {
         int s, d;
         cin>>s>>d;
         add_edge(s, d, false);
+
+        /*
+        When to use which:
+        -> Directed graph: add_edge(s, d, false);
+        -> Undirected graph: add_edge(s, d); or add_edge(s, d, true);
+        */ 
     }
     display();
     
