@@ -19,6 +19,11 @@ int main(){
     cout<<"Enter the size of columns: ";
     cin>>c;
 
+    if(r != c){
+        printf("The given matrix is Unsymmetric.");
+        return 0;
+    }
+
     // 2D array input
     int arr[r][c];
     for(int i=0;i<r;i++){
@@ -41,23 +46,23 @@ int main(){
     int brr[c][r];
     for(int i=0;i<c;i++){
         for(int j=0;j<r;j++){
-            brr[j][i]=arr[j][i];
+            brr[i][j] = arr[j][i]; // fixed
         }
     }
 
     // transpose matrix printing
     for(int i=0;i<c;i++){
         for(int j=0;j<r;j++){
-            cout<<brr[j][i]<<" ";
+            cout<<brr[i][j]<<" "; // fixed
         }
         cout<<endl;
     }
 
-    // check symmetric or not unsymmetric i.e. check original matrix = transpose matrix.
+    // check symmetric or not: original matrix == transpose matrix
     int count = 0;
     for(int i=0;i<r;i++){
-        for(int j=0;i<c;j++){
-            if(arr[i][j]!=brr[i][j]){
+        for(int j=0;j<c;j++){ // fixed condition
+            if(arr[i][j] != brr[i][j]){
                 count++;
                 break;
             }
