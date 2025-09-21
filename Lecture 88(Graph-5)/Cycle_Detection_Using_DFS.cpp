@@ -1,3 +1,35 @@
+/*
+Given a directed graph, return true if there is a cycle in the graph, otherwise return false.
+
+Example 1:
+
+Input:
+4 3
+0 1
+1 2
+2 0
+
+Output:
+true
+
+Explanation:
+There is a cycle in the graph: 0 -> 1 -> 2 -> 0.
+
+Example 2:
+
+Input:
+4 3
+0 1
+1 2
+2 3
+
+Output:
+false
+
+Explanation:
+There is no cycle in the graph.
+*/
+
 #include <iostream>
 #include <vector>
 #include <list>
@@ -24,15 +56,15 @@ void display(){
     }
 }
 
-bool dfs(int src, int parent, unordered_set<int> &vis) {
-    vis.insert(src);
+bool dfs(int src, int parent, unordered_set<int> &visited) {
+    visited.insert(src);
     for(auto neighbour : graph[src]) {
-        if(vis.count(neighbour) and neighbour != parent) {
+        if(visited.count(neighbour) and neighbour != parent) {
             // cycle detected
             return true;
         }
-        if(!vis.count(neighbour)) {
-            bool res = dfs(neighbour, src, vis);
+        if(!visited.count(neighbour)) {
+            bool res = dfs(neighbour, src, visited);
             if(res == true) return true;
         }
     } 
@@ -40,10 +72,10 @@ bool dfs(int src, int parent, unordered_set<int> &vis) {
 }
 
 bool hasCycle() {
-    unordered_set<int> vis;
+    unordered_set<int> visited;
     for(int i = 0; i < v; i++) {
-        if(!vis.count(i)) {
-            bool result = dfs(i, -1, vis);
+        if(!visited.count(i)) {
+            bool result = dfs(i, -1, visited);
             if(result == true) return true;
         }
     }
@@ -64,9 +96,16 @@ int main(){
         cout << "Enter source and destination: ";
         cin >> src >> dest;
         add_edge(src, dest, false); // waighted graph
+        /*
+        When to use which:
+        -> Directed graph: add_edge(s, d, false);
+        -> Undirected graph: add_edge(s, d); or add_edge(s, d, true);
+        */ 
 
     }
     display();
     cout<<boolalpha<<hasCycle();
+    // true -> cycle present
+    // false -> cycle not present
     return 0;
 }

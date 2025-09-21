@@ -1,3 +1,34 @@
+/*
+Given a directed graph, return true if there is a cycle in the graph, otherwise return false.
+
+Example 1:
+
+Input:
+4 3
+0 1
+1 2
+2 0
+
+Output:
+true
+
+Explanation:
+There is a cycle in the graph: 0 -> 1 -> 2 -> 0.
+
+Example 2:
+
+Input:
+4 3
+0 1
+1 2
+2 3
+
+Output:
+false
+
+Explanation:
+There is no cycle in the graph.
+*/ 
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -51,12 +82,15 @@ bool hasCycle(){
 
 int main() {
 
+    cout<<"Enter number of vertices: ";
     cin>>v;
     graph.resize(v, list<int> ());
     int e;
+    cout<<"Enter number of edges: ";
     cin>>e;
     while(e--) {
         int s, d;
+        cout<<"Enter source and destination: ";
         cin>>s>>d;
         add_edge(s, d, false);
 
@@ -69,6 +103,8 @@ int main() {
     display();
     
     cout<<boolalpha<<hasCycle()<<endl;
+    // true -> cycle present
+    // false -> cycle not present
 
     return 0;
 }

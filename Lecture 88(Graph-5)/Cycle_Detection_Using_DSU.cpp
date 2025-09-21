@@ -1,3 +1,35 @@
+/*
+Given an undirected graph, return true if there is a cycle in the graph, otherwise return false.
+
+Example 1:
+
+Input:
+4 3
+0 1
+1 2
+2 0
+
+Output:
+true
+
+Explanation:
+There is a cycle in the graph: 0 -> 1 -> 2 -> 0.
+
+Example 2:
+
+Input:
+4 3
+0 1
+1 2
+2 3
+
+Output:
+false
+
+Explanation:
+There is no cycle in the graph.
+*/
+
 #include <iostream>
 #include <vector>
 using namespace std;
