@@ -109,43 +109,43 @@ node *cloneGraph(node *original){
     return clone;
 };
 
-// void display(node *node){
-//     if(node == nullptr) return;
-//     cout<<"node "<<node->value<<" has neighbors: ";
-//     for(auto neighbor : node->neighbors){
-//         cout<<neighbor->value<<" ";
-//     }
-//     cout<<endl;
-//     for(auto neighbor : node->neighbors){
-//         display(neighbor);
-//     }
-// }
+void display(node *node){
+    if(node == nullptr) return;
+    cout<<"node "<<node->value<<" has neighbors: ";
+    for(auto neighbor : node->neighbors){
+        cout<<neighbor->value<<" ";
+    }
+    cout<<endl;
+    for(auto neighbor : node->neighbors){
+        display(neighbor);
+    }
+}
 
-// int main(){
-//     node *node1 = new node(1);
-//     node *node2 = new node(2);
-//     node *node3 = new node(3);
-//     node *node4 = new node(4);
+int main(){
+    node *node1 = new node(1);
+    node *node2 = new node(2);
+    node *node3 = new node(3);
+    node *node4 = new node(4);
 
-//     node1->neighbors.push_back(node2);
-//     node1->neighbors.push_back(node4);
-//     node2->neighbors.push_back(node1);
-//     node2->neighbors.push_back(node3);
-//     node3->neighbors.push_back(node2);
-//     node3->neighbors.push_back(node4);
-//     node4->neighbors.push_back(node1);
-//     node4->neighbors.push_back(node3);
+    node1->neighbors.push_back(node2);
+    node1->neighbors.push_back(node4);
+    node2->neighbors.push_back(node1);
+    node2->neighbors.push_back(node3);
+    node3->neighbors.push_back(node2);
+    node3->neighbors.push_back(node4);
+    node4->neighbors.push_back(node1);
+    node4->neighbors.push_back(node3);
 
-//     // clone the graph
-//     node *clone = cloneGraph(node1);
+    // clone the graph
+    node *clone = cloneGraph(node1);
 
-//     // Display the original graph
-//     cout<<"Original Graph: "<<endl;
-//     display(node1);
+    // Display the original graph
+    cout<<"Original Graph: "<<endl;
+    display(node1);
 
-//     // Display the cloned graph
-//     cout<<"Cloned Graph: "<<endl;
-//     display(clone);
+    // Display the cloned graph
+    cout<<"Cloned Graph: "<<endl;
+    display(clone);
 
-//     return 0;
-// }
+    return 0;
+}
