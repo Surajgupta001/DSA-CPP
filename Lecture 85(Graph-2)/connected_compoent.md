@@ -17,23 +17,23 @@ There are several algorithms for finding connected components in a graph. Here a
 2. Breadth-First Search (BFS): BFS is another popular algorithm for finding connected components. It works by traversing the graph breadth-first, starting from an arbitrary vertex.
 3. Union-Find Algorithm: The union-find algorithm is a disjoint-set data structure that can be used to find connected components.
 
-# Weakly Connected Graph
+## Weakly Connected Graph
 
 A weakly connected graph is a graph in which there is a path from every vertex to every other vertex, but the path may not be directed. In other words, it is possible to reach any vertex from any other vertex by traversing the edges of the graph, but we may need to traverse some edges in the opposite direction.
 
-## Properties:
+## Properties
 
 1. Every vertex is reachable from every other vertex, but the path may not be directed.
 2. The graph may have "dead ends" or vertices that are only reachable in one direction.
 3. The graph may have edges that are only traversable in one direction.
 
-## Characteristics:
+## Characteristics
 
 1. A weakly connected graph may have multiple connected components.
 2. A weakly connected graph is not necessarily strongly connected.
 3. A weakly connected graph may have edges that are only traversable in one direction.
 
-## Types of Weakly Connected Graphs:
+## Types of Weakly Connected Graphs
 
 1. Directed Weakly Connected Graph: A directed graph in which there is a path from every vertex to every other vertex, but the path may not be directed.
 2. Undirected Weakly Connected Graph: An undirected graph in which there is a path from every vertex to every other vertex, but the path may not be directed.
@@ -107,7 +107,7 @@ int main(){
 }
 ```
 
-## Time Complexity
+## Time Complexity for Weakly Connected Components
 
 The time complexity of finding weakly connected components in a directed graph is O(V + E), where:
 
@@ -122,8 +122,7 @@ The space complexity of finding weakly connected components in a directed graph 
 V is the number of vertices (nodes) in the graph.
 This is because we need to store the visited vertices and the components they belong to.
 
-
-# Strongly Connected Component (SCC)
+## Strongly Connected Component (SCC)
 
 ## Overview
 
@@ -157,6 +156,7 @@ Kosaraju's algorithm is a linear-time algorithm for finding SCCs in a directed g
 * Step 4: Output the SCCs
 
 ## Algorithms
+
 ```cpp
 /*
 Strongly Connected Component (SCC)
@@ -273,7 +273,9 @@ int main(){
 ```
 
 ## Time Complexity
+
 The time complexity of Kosaraju's algorithm is O(V + E), where V is the number of vertices and E is the number of edges in the graph.
 
-## Space Complexity
+## Space Complexity of Kosaraju's Algorithm
+
 The space complexity of Kosaraju's algorithm is O(V + E), where V is the number of vertices and E is the number of edges in the graph.
