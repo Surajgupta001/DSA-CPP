@@ -53,7 +53,9 @@ void dfs(vector<vector<int>>& image, int currRow, int currCol, int initialColor,
     // If the cell you landed is not of inital color
     if(image[currRow][currCol] != initialColor) return;
 
-    image[currRow][currCol] = newColor;
+    image[currRow][currCol] = newColor; // Change the color of the current pixel because it has the initial color to avoid revisiting.
+    
+    // Explore in all 4 directions (Down, Left, Up, Right)
     dfs(image, currRow + 1, currCol, initialColor, newColor); // down
     dfs(image, currRow, currCol - 1, initialColor, newColor); // left
     dfs(image, currRow - 1, currCol, initialColor, newColor); // up
@@ -61,8 +63,11 @@ void dfs(vector<vector<int>>& image, int currRow, int currCol, int initialColor,
 }
 
 vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color){ // sr -> source row ; sc -> source column
-    if(color == image[sr][sc]) return image;
+    
+    if(color == image[sr][sc]) return image; // If the new color is same as the initial color, return the image as it is
+    
     dfs(image, sr, sc, image[sr][sc], color);
+    
     return image;
 }
 
