@@ -30,41 +30,43 @@ Explanation: We can not enter room number 2 since the only key that unlocks it i
 #include <queue>
 using namespace std;
 
-bool canVisitAllRooms(vector<vector<int>>& rooms){ // bfs
-    unordered_set<int> visited;
-    queue<int> q;
-    q.push(0);
-    visited.insert(0);
-    while(!q.empty()){
-        int curr = q.front();
-        q.pop();
-        for(auto neighbour : rooms[curr]){
-            if(visited.count(neighbour == 0)){
-                q.push(neighbour);
-                visited.insert(neighbour);
+// ======================== bfs =====================
+bool canVisitAllRooms(vector<vector<int>>& rooms){
+    unordered_set<int> visited; // To keep track of visited rooms
+    queue<int> q; // Queue for BFS
+    q.push(0); // Start from room 0
+    visited.insert(0); // Mark room 0 as visited
+
+    // BFS traversal
+    while(!q.empty()){ // 
+        int curr = q.front(); // Current room
+        q.pop(); // Remove the room from the queue
+
+        for(auto neighbour : rooms[curr]){ // Explore all keys in the current room
+            if(visited.count(neighbour) == 0){ // If the room is not visited
+                q.push(neighbour); // Add the room to the queue
+                visited.insert(neighbour); // Mark the room as visited
             }
         }
     }
-    return visited.size() == rooms.size();
+    return visited.size() == rooms.size(); // Check if all rooms are visited
 }
 
-/*
-======================== dfs =====================
+// ======================== dfs =====================
 bool dfs(vector<vector<int>>& rooms, int curr, unordered_set<int>& visited){
-    visited.insert(curr);
-    for(auto neighbour : rooms[curr]){
-        if(visited.count(neighbour) == 0){
-            if(dfs(rooms, neighbour, visited)) return false;
+    visited.insert(curr); // Mark the current room as visited
+    for(auto neighbour : rooms[curr]){ // Explore all keys in the current room
+        if(visited.count(neighbour) == 0){ // If the room is not visited
+            if(dfs(rooms, neighbour, visited)) return false; // Recur for the room
         }
     }
-    return visited.size() == rooms.size();
+    return visited.size() == rooms.size(); // Check if all rooms are visited
 }
 
-bool canVisiAllRooms(vector<vector<int>>& rooms){
+bool canVisitAllRooms(vector<vector<int>>& rooms){
     unordered_set<int> visited;
     return dfs(rooms, 0, visited);
 }
-*/ 
 
 int main(){
     
