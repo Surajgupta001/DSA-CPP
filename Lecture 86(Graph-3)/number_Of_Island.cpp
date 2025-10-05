@@ -5,8 +5,6 @@ Given an m x n 2D binary grid grid which represents a map of '1's (land) and '0'
 
 An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically. You may assume all four edges of the grid are all surrounded by water.
 
- 
-
 Example 1:
 
 Input: grid = [
@@ -16,6 +14,7 @@ Input: grid = [
   ["0","0","0","0","0"]
 ]
 Output: 1
+
 Example 2:
 
 Input: grid = [
@@ -27,71 +26,84 @@ Input: grid = [
 Output: 3
 */ 
 
+// ========== Connected Component in a 2D Grid ==========
+
 #include <iostream>
 #include <vector>
 #include <queue>
 using namespace std;
 
-int numIsLand(vector<vector<char>>& grid){
-    
-    int row = grid.size();
-    int col = grid[0].size();
-    int cc = 0;
+int numIslands(vector<vector<char>>& grid) {
+    int rows = grid.size();
+    int cols = grid[0].size();
 
-    for(int r=0; r<row; r++){
-        for(int c=0; c<col; c++){
-            if(grid[r][c] == '0') continue; // It is a water body 
-            if(grid[r][c] == '!1') continue; // It is a visited land
-            // new unvisited land piece found, i.e. new connected component
-            cc++;
-            grid[r][c] = '0'; // mark it visited
-            
-            queue<pair<int, int>> q;
-            q.push({r, c}); // store thr src node
-            while(!q.empty()){
-                auto curr = q.front(); // get one node from queue
-                q.pop();
+    int connectedComponents = 0; // Store the number of connected components (islands)
+
+    for(int i = 0; i < rows; i++){
+        for(int j = 0; j < cols; j++){
+            if(grid[i][j] == '0'){
+                // It is a water body, skip it
+                continue;
+            }
+
+            // New Unvisited land found, increment the connected components count
+            connectedComponents++;
+            grid[i][j] = '0'; // Mark it as visited
+
+            // BFS
+            queue<pair<int, int>> qu; // Queue to store the nodes to be processed -> {row, col}
+            qu.push({i, j}); // Store the source node
+
+            while(!qu.empty()){
+                auto curr = qu.front(); // Get the front node
+                qu.pop(); // Remove the front node
                 
-                // go to all unvisited neighbours of the curr node
-                int currRow = curr.first;
-                int currCol = curr.second;
-                // check all 4 neighbours
-                // check up
-                if(currRow + 1 >= 0 and grid[currRow - 1][currCol] == '1'){
-                    q.push({currRow-1, currCol});
-                    grid[currRow - 1][currCol] = '0'; // mark it visited
+                // Go to all Unvisited land neighbours of the current node
+                int currRow = curr.first; // Current node row
+                int currCol = curr.second; // Current node column
+
+                // Check up neighbour
+                if(currRow - 1 >= 0 && grid[currRow - 1][currCol] == '1'){
+                    // Top neighbour
+                    qu.push({currRow - 1, currCol}); // Push it to the queue
+                    grid[currRow - 1][currCol] = '0'; // Mark it as visited
                 }
-                // check down
-                if(currRow + 1 < row and grid[currRow + 1][currCol] == '1'){
-                    q.push({currRow+1, currCol});
-                    grid[currRow + 1][currCol] = '0'; // mark it visited
+
+                // Check down neighbour
+                if(currRow + 1 < rows && grid[currRow + 1][currCol] == '1'){
+                    // Bottom neighbour
+                    qu.push({currRow + 1, currCol}); // Push it to the queue
+                    grid[currRow + 1][currCol] = '0'; // Mark it as visited
                 }
-                // check left
-                if(currCol - 1 >= 0 and grid[currRow][currCol - 1] == '1'){
-                    q.push({currRow, currCol - 1});
-                    grid[currRow][currCol - 1] = '0'; // mark it visited
+
+                // Check left neighbour
+                if(currCol - 1 >= 0 && grid[currRow][currCol - 1] == '1'){
+                    // Left neighbour
+                    qu.push({currRow, currCol - 1}); // Push it to the queue
+                    grid[currRow][currCol - 1] = '0'; // Mark it as visited
                 }
-                // check right
-                if(currCol + 1 < col and grid[currRow][currCol + 1] == '1'){
-                    q.push({currRow, currCol + 1});
-                    grid[currRow][currCol + 1] = '0'; // mark it visited
+
+                // Check right neighbour
+                if(currCol + 1 < cols && grid[currRow][currCol + 1] == '1'){
+                    // Right neighbour
+                    qu.push({currRow, currCol + 1}); // Push it to the queue
+                    grid[currRow][currCol + 1] = '0'; // Mark it as visited
                 }
             }
         }
     }
-    return cc;
+    return connectedComponents;
 }
 
-int main(){
+int main() {
     vector<vector<char>> grid = {
-        {'1','1','1','1','0'},
-        {'1','1','0','1','0'},
         {'1','1','0','0','0'},
-        {'0','0','0','0','0'}
+        {'1','1','0','0','0'},
+        {'0','0','1','0','0'},
+        {'0','0','0','1','1'}
     };
 
-    int numIslands = numIsLand(grid);
-    cout << "Number of Islands: " << numIslands << endl;
+    cout << "Number of Islands: " << numIslands(grid) << endl;
 
     return 0;
 }
