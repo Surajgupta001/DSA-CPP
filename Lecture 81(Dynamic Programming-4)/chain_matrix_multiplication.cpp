@@ -29,8 +29,7 @@ Explanation: As there is only one matrix so, there is no cost of multiplication.
 #include <climits>
 using namespace std;
 
-/*
-=========== Recursion ==================
+// =========== Recursion ==================
 int chainMatrixMultiplication(int i, int j, vector<int>& v){
     if(i == j or i+1 == j) return 0;
     int ans = INT_MAX;
@@ -38,8 +37,7 @@ int chainMatrixMultiplication(int i, int j, vector<int>& v){
         ans = min(ans, chainMatrixMultiplication(i,k,v) + chainMatrixMultiplication(k,j,v) + v[i]*v[k]*v[j]);
     }
     return ans;
-}
-*/ 
+} 
 
 int helper(int i, int j, vector<int>& v, vector<vector<int>> dp){
     if(i == j or i+1 == j) return 0;
@@ -56,8 +54,7 @@ int matrixChainMultiplication(int n, vector<int>& v){
     return helper(0,n-1,v,dp);
 }
 
-/*
-=================== Tabulation =====================
+// =================== Tabulation =====================
 int matrixChainMultiplication(int n, vector<int>& v){
     vector<vector<int>> dp(n, vector<int>(n,0));
     for(int len=3;len<=n;len++){
@@ -71,7 +68,6 @@ int matrixChainMultiplication(int n, vector<int>& v){
     }
     return dp[0][n-1];
 }
-*/ 
 
 int main(){
 
