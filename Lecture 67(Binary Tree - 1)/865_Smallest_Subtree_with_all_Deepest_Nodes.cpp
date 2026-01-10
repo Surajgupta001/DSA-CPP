@@ -83,8 +83,8 @@ node *lcaDeepestLeaves(node *root){
     return LCA(root);
 }
 
-/*
-========== Effiecient Approche ============
+
+// ========== Effiecient Approche ============
 pair<int, node*> solve(node* root) {
     if(root == NULL) return {0, NULL};
 
@@ -99,7 +99,6 @@ pair<int, node*> solve(node* root) {
 node* lcaDeepestLeaves(node* root) {
     return solve(root).second;   
 }
-*/ 
 
 int main(){
     // Create a binary tree
