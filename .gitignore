@@ -1,0 +1,43 @@
+*.exe
+*.out
+*.o
+
+# Compiled object and binary files
+*.obj
+*.dll
+*.lib
+*.a
+*.so
+
+# Precompiled headers
+*.gch
+
+# Build directories
+build/
+bin/
+Debug/
+Release/
+
+# Visual Studio / editor files
+.vscode/
+.vs/
+*.vcxproj.user
+*.suo
+*.user
+*.userosscache
+.VC.db
+
+# CMake files
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# Logs and OS files
+*.log
+.DS_Store
+Thumbs.db
+
+# Backup and swap files
+*~
+*.swp
