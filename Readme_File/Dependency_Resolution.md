@@ -10,10 +10,10 @@ We can use the topological sorting algorithm to resolve dependencies in a graph.
 
 ## Algorithm
 
-1. Create a graph: Represent the dependencies as a directed graph, where each node represents a task or a module, and a directed edge from node u to node v indicates that task u depends on task v.<br>
-1. Find all nodes with no incoming edges: These nodes have no dependencies and can be resolved first.<br>
-3. Remove nodes with no incoming edges: Remove these nodes from the graph and add them to the result.<br>
-4. Repeat steps 2-3: Continue removing nodes with no incoming edges until the graph is empty.<br>
+1. Create a graph: Represent the dependencies as a directed graph, where each node represents a task or a module, and a directed edge from node u to node v indicates that task u depends on task v
+2. Find all nodes with no incoming edges: These nodes have no dependencies and can be resolved first
+3. Remove nodes with no incoming edges: Remove these nodes from the graph and add them to the result
+4. Repeat steps 2-3: Continue removing nodes with no incoming edges until the graph is empty
 5. Check for cycles: If the graph is not empty after removing all nodes with no incoming edges, it means there is a cycle in the graph, and the dependencies cannot be resolved.
 
 ## Example Use Case
@@ -23,26 +23,26 @@ Suppose we have a graph representing dependencies between tasks:
 * Task A depends on tasks B and C.
 * Task B depends on task D.
 * Task C depends on task D.
-* Task D has no dependencies.<br>
-The topological sorting of this graph would be: D, B, C, A.<br>
-The graph can be represented as:<br>
-A -> B <br>
-A -> C <br>
-B -> D <br>
-C -> D <br>
-<br>
+* Task D has no dependencies
+The topological sorting of this graph would be: D, B, C, A
+The graph can be represented as
+A -> B
+A -> C
+B -> D
+C -> D
 
-Using the topological sorting algorithm, we can resolve the dependencies as follows:<br>
+Using the topological sorting algorithm, we can resolve the dependencies as follows
 
 1. Find all nodes with no incoming edges: D
-2. Remove node D: A -> B, A -> C, B -> D (removed), C -> D (removed)<br>
+2. Remove node D: A -> B, A -> C, B -> D (removed), C -> D (removed)
 3. Find all nodes with no incoming edges: B, C
-Remove nodes B and C: A -> B (removed), A -> C (removed)<br>
-4. Find all nodes with no incoming edges: A<br>
-6. Remove node A: (graph is empty)<br>
-The resolved dependencies are: D, B, C, A<br>
+Remove nodes B and C: A -> B (removed), A -> C (removed)
+4. Find all nodes with no incoming edges: A
+5. Remove node A: (graph is empty)
+The resolved dependencies are: D, B, C
 
-## Code Implementation<br>
+## Code Implementation
+
 Here is a sample implementation of the topological sorting algorithm in C++:
 
 ```cpp
